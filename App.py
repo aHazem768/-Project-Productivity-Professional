@@ -555,6 +555,7 @@ import os
 import subprocess
 import platform
 import shutil
+import webbrowser
 
 # Функция для проверки наличия команды в системе
 def command_exists(command):
@@ -582,19 +583,22 @@ if st.sidebar.checkbox("Открыть файл Renga.rnp"):
                     subprocess.Popen(["xdg-open", file_path])
                     st.write("Файл открыт с использованием xdg-open")
                 else:
-                    st.error("Команда 'xdg-open' не найдена в системе.")
+                    st.error("Команда 'xdg-open' не найдена в системе. Попробуем открыть файл в браузере.")
+                    webbrowser.open_new_tab(f"file://{file_path}")
             elif system == "Darwin":  # macOS
                 if command_exists("open"):
                     subprocess.Popen(["open", file_path])
                     st.write("Файл открыт с использованием open")
                 else:
-                    st.error("Команда 'open' не найдена в системе.")
+                    st.error("Команда 'open' не найдена в системе. Попробуем открыть файл в браузере.")
+                    webbrowser.open_new_tab(f"file://{file_path}")
             elif system == "Windows":
                 if hasattr(os, 'startfile'):
                     os.startfile(file_path)
                     st.write("Файл открыт с использованием os.startfile")
                 else:
-                    st.error("Функция 'os.startfile' не доступна в этой системе.")
+                    st.error("Функция 'os.startfile' не доступна в этой системе. Попробуем открыть файл в браузере.")
+                    webbrowser.open_new_tab(f"file://{file_path}")
             else:
                 st.error(f"Операционная система '{system}' не поддерживается для автоматического открытия файлов")
             
@@ -602,3 +606,4 @@ if st.sidebar.checkbox("Открыть файл Renga.rnp"):
         except Exception as e:
             st.error(f"Произошла ошибка: {e}")
             st.write(f"Детали ошибки: {e}")
+
