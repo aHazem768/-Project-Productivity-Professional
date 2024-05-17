@@ -549,95 +549,21 @@ if st.sidebar.checkbox("Справка"):
 #-----------------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------------------
-# import streamlit as st
-# import tempfile
-# import os
-# import subprocess
-# import platform
-# import shutil
-
-# # Функция для проверки наличия команды в системе
-# def command_exists(command):
-#     return shutil.which(command) is not None
-
-# # Открыть файл Renga.rnp
-# if st.sidebar.checkbox("Открыть файл Renga.rnp"):
-#     uploaded_file = st.sidebar.file_uploader("Импорт файла Renga", type=["rnp"])
-#     if uploaded_file is not None:
-#         try:
-#             # Создание временного каталога, если он не существует
-#             temp_dir = tempfile.mkdtemp()
-#             st.write("Временный каталог создан:", temp_dir)
-            
-#             # Сохранение загруженного файла во временном каталоге
-#             file_path = os.path.join(temp_dir, uploaded_file.name)
-#             with open(file_path, "wb") as f:
-#                 f.write(uploaded_file.getbuffer())
-#             st.write("Файл сохранен по пути:", file_path)
-            
-#             # Открытие файла с использованием приложения по умолчанию, ассоциированного с его расширением
-#             system = platform.system()
-#             if system == "Linux":
-#                 if command_exists("xdg-open"):
-#                     subprocess.Popen(["xdg-open", file_path])
-#                     st.write("Файл открыт с использованием xdg-open")
-#                 else:
-#                     st.error("Команда 'xdg-open' не найдена в системе. Пожалуйста, установите её, чтобы открыть файлы автоматически.")
-#             elif system == "Darwin":  # macOS
-#                 if command_exists("open"):
-#                     subprocess.Popen(["open", file_path])
-#                     st.write("Файл открыт с использованием open")
-#                 else:
-#                     st.error("Команда 'open' не найдена в системе. Попробуйте установить её.")
-#             elif system == "Windows":
-#                 if hasattr(os, 'startfile'):
-#                     os.startfile(file_path)
-#                     st.write("Файл открыт с использованием os.startfile")
-#                 else:
-#                     st.error("Функция 'os.startfile' не доступна в этой системе.")
-#             else:
-#                 st.error(f"Операционная система '{system}' не поддерживается для автоматического открытия файлов")
-            
-#             st.sidebar.success("Файл успешно импортирован и открыт!")
-#         except Exception as e:
-#             st.error(f"Произошла ошибка: {e}")
-#             st.write(f"Детали ошибки: {e}")
-
-
-
-import streamlit as st
-import tempfile
-import os
-import subprocess
-
-# Открыть файл Renga.rnp
+# #Открыть файл Renga.rnp
+ 
+#Открыть файл Renga.rnp
 if st.sidebar.checkbox("Открыть файл Renga.rnp"):
     uploaded_file = st.sidebar.file_uploader("Импорт файла Renga", type=["rnp"])
     if uploaded_file is not None:
-        try:
-            # Создание временного каталога, если он не существует
-            temp_dir = tempfile.mkdtemp()
-            st.write("Временный каталог создан:", temp_dir)
-            
-            # Сохранение загруженного файла во временном каталоге
-            file_path = os.path.join(temp_dir, uploaded_file.name)
-            with open(file_path, "wb") as f:
-                f.write(uploaded_file.getbuffer())
-            st.write("Файл сохранен по пути:", file_path)
-            
-            # Открытие файла с использованием приложения по умолчанию, ассоциированного с его расширением
-            try:
-                subprocess.Popen(["xdg-open", file_path])  # Для Linux
-                st.write("Файл открыт с использованием xdg-open")
-            except FileNotFoundError:
-                try:
-                    subprocess.Popen(["open", file_path])  # Для macOS
-                    st.write("Файл открыт с использованием open")
-                except FileNotFoundError:
-                    os.startfile(file_path)  # Для Windows
-                    st.write("Файл открыт с использованием os.startfile")
-            
-            st.sidebar.success("Файл успешно импортирован и открыт!")
-        except Exception as e:
-            st.error(f"Произошла ошибка: {e}")
-            st.write(f"Детали ошибки: {e}")
+        # Create the 'temp' directory if it doesn't exist
+        if not os.path.exists("temp"):
+            os.makedirs("temp")
+        
+        # Save the uploaded file in the 'temp' directory
+        with open(os.path.join("temp", uploaded_file.name), "wb") as f:
+            f.write(uploaded_file.getbuffer())
+        
+        # Запускаем файл
+        os.startfile(os.path.join("temp", uploaded_file.name))
+        st.sidebar.success("Файл был успешно импортирован и запущен!")
+ 
