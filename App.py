@@ -3,16 +3,16 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
-import plotly.express as px
+# import plotly.express as px
 import re
 import os
 from docx import Document
 from docx.shared import Inches
 import tempfile
 import subprocess
-# import win32com.client
-# import tempfile
-# import magic
+import win32com.client
+import tempfile
+import magic
 #------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------
@@ -463,56 +463,56 @@ if show_calculator:
 #------------------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------------------
 
-#       ----=-----Путь к журналу   -------
+      # ----=-----Путь к журналу   -------
 
 
-# # Function to handle importing RNP files
-# def import_rnp(file_buffer, app):
-#     if file_buffer is not None:
-#         # Save the uploaded file to a temporary location
-#         file_path = tempfile.NamedTemporaryFile(delete=False).name
-#         with open(file_path, "wb") as f:
-#             f.write(file_buffer.getvalue())
+# Function to handle importing RNP files
+def import_rnp(file_buffer, app):
+    if file_buffer is not None:
+        # Save the uploaded file to a temporary location
+        file_path = tempfile.NamedTemporaryFile(delete=False).name
+        with open(file_path, "wb") as f:
+            f.write(file_buffer.getvalue())
 
-#         # Check if the temporary file exists
-#         if os.path.exists(file_path):
-#             # Check if the file is a Renga project file
-#             file_type = magic.Magic(mime=True).from_file(file_path)
-#             if file_type == 'application/octet-stream':
-#                 st.error("Invalid file format. Please upload a valid Renga project file.")
-#                 return
+        # Check if the temporary file exists
+        if os.path.exists(file_path):
+            # Check if the file is a Renga project file
+            file_type = magic.Magic(mime=True).from_file(file_path)
+            if file_type == 'application/octet-stream':
+                st.error("Invalid file format. Please upload a valid Renga project file.")
+                return
 
-#             # Open the Renga project
-#             app.OpenProject(file_path)
-#             project = app.Project
-#             if project is not None:
-#                 model = project.Model
-#                 # Create a DataFrame with project information
-#                 data = {
-#                     "Attribute": ["Путь к журналу"],
-#                     "Value": [project.JournalPath]
-#                 }
-#                 df = pd.DataFrame(data)
-#                 # Display project information in a table
-#                 st.write(df)
-#             else:
-#                 st.error("Failed to open the Renga project.")
-#         else:
-#             st.error("Failed to upload the file.")
+            # Open the Renga project
+            app.OpenProject(file_path)
+            project = app.Project
+            if project is not None:
+                model = project.Model
+                # Create a DataFrame with project information
+                data = {
+                    "Attribute": ["Путь к журналу"],
+                    "Value": [project.JournalPath]
+                }
+                df = pd.DataFrame(data)
+                # Display project information in a table
+                st.write(df)
+            else:
+                st.error("Failed to open the Renga project.")
+        else:
+            st.error("Failed to upload the file.")
 
-# # Create a Renga application instance
-# app = win32com.client.Dispatch("Renga.Application.1")
+# Create a Renga application instance
+app = win32com.client.Dispatch("Renga.Application.1")
 
-# # Make the Renga application visible
-# app.Visible = True
+# Make the Renga application visible
+app.Visible = True
 
-# # Create a Streamlit sidebar button
-# if st.sidebar.checkbox("Где находится журнал .Log"):
-#     # Inside the checkbox, create a Streamlit file uploader widget
-#     uploaded_file = st.sidebar.file_uploader("Upload RNP file", type=["rnp"])
-#     # If file is uploaded, call import_rnp function
-#     if uploaded_file is not None:
-#         import_rnp(uploaded_file, app)
+# Create a Streamlit sidebar button
+if st.sidebar.checkbox("Где находится журнал .Log"):
+    # Inside the checkbox, create a Streamlit file uploader widget
+    uploaded_file = st.sidebar.file_uploader("Upload RNP file", type=["rnp"])
+    # If file is uploaded, call import_rnp function
+    if uploaded_file is not None:
+        import_rnp(uploaded_file, app)
 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------
