@@ -614,22 +614,30 @@ import subprocess
 if st.sidebar.checkbox("Открыть файл Renga.rnp"):
     uploaded_file = st.sidebar.file_uploader("Импорт файла Renga", type=["rnp"])
     if uploaded_file is not None:
-        # Создание временного каталога, если он не существует
-        temp_dir = tempfile.mkdtemp()
-        
-        # Сохранение загруженного файла во временном каталоге
-        file_path = os.path.join(temp_dir, uploaded_file.name)
-        with open(file_path, "wb") as f:
-            f.write(uploaded_file.getbuffer())
-        
-        # Открытие файла с использованием приложения по умолчанию, ассоциированного с его расширением
         try:
-            subprocess.Popen(["xdg-open", file_path])  # Для Linux
-        except FileNotFoundError:
+            # Создание временного каталога, если он не существует
+            temp_dir = tempfile.mkdtemp()
+            st.write("Временный каталог создан:", temp_dir)
+            
+            # Сохранение загруженного файла во временном каталоге
+            file_path = os.path.join(temp_dir, uploaded_file.name)
+            with open(file_path, "wb") as f:
+                f.write(uploaded_file.getbuffer())
+            st.write("Файл сохранен по пути:", file_path)
+            
+            # Открытие файла с использованием приложения по умолчанию, ассоциированного с его расширением
             try:
-                subprocess.Popen(["open", file_path])  # Для macOS
+                subprocess.Popen(["xdg-open", file_path])  # Для Linux
+                st.write("Файл открыт с использованием xdg-open")
             except FileNotFoundError:
-                os.startfile(file_path)  # Для Windows
-        
-        st.sidebar.success("Файл успешно импортирован и открыт!")
-
+                try:
+                    subprocess.Popen(["open", file_path])  # Для macOS
+                    st.write("Файл открыт с использованием open")
+                except FileNotFoundError:
+                    os.startfile(file_path)  # Для Windows
+                    st.write("Файл открыт с использованием os.startfile")
+            
+            st.sidebar.success("Файл успешно импортирован и открыт!")
+        except Exception as e:
+            st.error(f"Произошла ошибка: {e}")
+            st.write(f"Детали ошибки: {e}")
