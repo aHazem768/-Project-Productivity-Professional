@@ -554,6 +554,11 @@ import tempfile
 import os
 import subprocess
 import platform
+import shutil
+
+# Функция для проверки наличия команды в системе
+def command_exists(command):
+    return shutil.which(command) is not None
 
 # Открыть файл Renga.rnp
 if st.sidebar.checkbox("Открыть файл Renga.rnp"):
@@ -573,14 +578,23 @@ if st.sidebar.checkbox("Открыть файл Renga.rnp"):
             # Открытие файла с использованием приложения по умолчанию, ассоциированного с его расширением
             system = platform.system()
             if system == "Linux":
-                subprocess.Popen(["xdg-open", file_path])
-                st.write("Файл открыт с использованием xdg-open")
+                if command_exists("xdg-open"):
+                    subprocess.Popen(["xdg-open", file_path])
+                    st.write("Файл открыт с использованием xdg-open")
+                else:
+                    st.error("Команда 'xdg-open' не найдена в системе.")
             elif system == "Darwin":  # macOS
-                subprocess.Popen(["open", file_path])
-                st.write("Файл открыт с использованием open")
+                if command_exists("open"):
+                    subprocess.Popen(["open", file_path])
+                    st.write("Файл открыт с использованием open")
+                else:
+                    st.error("Команда 'open' не найдена в системе.")
             elif system == "Windows":
-                os.startfile(file_path)
-                st.write("Файл открыт с использованием os.startfile")
+                if hasattr(os, 'startfile'):
+                    os.startfile(file_path)
+                    st.write("Файл открыт с использованием os.startfile")
+                else:
+                    st.error("Функция 'os.startfile' не доступна в этой системе.")
             else:
                 st.error(f"Операционная система '{system}' не поддерживается для автоматического открытия файлов")
             
@@ -588,4 +602,3 @@ if st.sidebar.checkbox("Открыть файл Renga.rnp"):
         except Exception as e:
             st.error(f"Произошла ошибка: {e}")
             st.write(f"Детали ошибки: {e}")
-
