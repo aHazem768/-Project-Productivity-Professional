@@ -11,7 +11,7 @@ import os
 import tempfile
 import subprocess
 # import win32com.client
-# import tempfile
+import tempfile
 # import magic
 # import openpyxl
 #------------------------------------------------------------------------------------------------------------------------------------
