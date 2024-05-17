@@ -71,11 +71,10 @@ if st.sidebar.checkbox("Основные характеристики"):
         st.write("***Основные характеристики Проекта:***")
         with st.expander("Показать таблицу"):
             df = pd.DataFrame(inputs.items(), columns=['Имя атрибута', 'Описание'])
-            column_widths = {'Имя атрибута': 600, 'Описание': 800}
-        st.dataframe(df, width=column_widths)
+           
           
             # st.write(df) 
-            # st.dataframe(df, width=600)
+            st.dataframe(df, width=600)
         
 
 
