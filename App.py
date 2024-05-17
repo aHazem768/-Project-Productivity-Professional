@@ -6,8 +6,8 @@ from PIL import Image
 import plotly.express as px
 import re
 import os
-from docx import Document
-from docx.shared import Inches
+# from docx import Document
+# from docx.shared import Inches
 import tempfile
 import subprocess
 # import win32com.client
