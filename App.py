@@ -76,8 +76,8 @@ if st.sidebar.checkbox("Основные характеристики"):
 
             # Применение стилей к DataFrame
             styled_df = df.style.set_table_styles([
-                {'selector': 'th', 'props': [('max-width', '30px'), ('word-wrap', 'break-word')]},
-                {'selector': 'td', 'props': [('max-width', '30px'), ('word-wrap', 'break-word')]}
+                {'selector': 'th', 'props': [('max-width', '300px'), ('word-wrap', 'break-word')]},
+                {'selector': 'td', 'props': [('max-width', '300px'), ('word-wrap', 'break-word')]}
             ])
 
             st.write(styled_df.to_html(), unsafe_allow_html=True)
