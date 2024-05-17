@@ -71,15 +71,27 @@ if st.sidebar.checkbox("Основные характеристики"):
         st.write("***Основные характеристики Проекта:***")
         with st.expander("Показать таблицу"):
             df = pd.DataFrame(inputs.items(), columns=['Имя атрибута', 'Описание'])
+            st.markdown(
+                """
+                <style>
+                .dataframe thead th {
+                    text-align: left;
+                }
+                .dataframe tbody tr th {
+                    max-width: 30px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+                .dataframe tbody tr td {
+                    max-width: 30px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+                </style>
+                """, unsafe_allow_html=True)
+            st.write(df)
             st.write(df)   
-            #  Создайте кнопку загрузки таблицы в файл Excel
-            # if st.checkbox('скачать таблицу в формате Excel'):
-            #     df_to_save = pd.DataFrame(inputs.items(), columns=['Имя атрибута', 'Описание'])
-            #     excel_file = 'Основные характеристики Проекта.xlsx'
-            #     with pd.ExcelWriter(excel_file) as writer:
-            #         df_to_save.to_excel(writer, index=False, sheet_name='Основные характеристики Проекта')
-            #         st.markdown(f'<a href="{excel_file}" download="Основные характеристики Проекта.xlsx">Нажмите здесь, чтобы скачать таблицу в формате Excel</a>', unsafe_allow_html=True)
-            #         st.markdown("---")
+           
 
 
 
