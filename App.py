@@ -42,10 +42,53 @@ resized_image = image.resize(new_size)
 #------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------
 # Основные характеристики
+# if st.sidebar.checkbox("Основные характеристики"):
+#     # st.sidebar.markdown("---")
+#     selected_dashboards = st.multiselect("Основные характеристики Проекта", ["Основные характеристики"])
+#     show_fields = st.checkbox("Характеристики проекта ")
+#     inputs = {}  # Пустой словарь для хранения введенных значений
+#     if show_fields:
+#         for dashboard_option in selected_dashboards:
+#             if dashboard_option == "Основные характеристики":
+#                 inputs["Название Проекта"] = st.text_input("Название Проекта", value="")
+#                 inputs["Адрис Проекта"] = st.text_input("Адрис Проекта", value="")
+#                 inputs["Вид работ"] = st.text_input("Вид работ", value="")
+#                 inputs["Генпроектировщик"] = st.text_input("Генпроектировщик", value="")
+#                 inputs["Номер договора"] = st.text_input("Номер договора", value="")
+#                 inputs["Закачик"] = st.text_input("Закачик", value="")
+#                 inputs["Стадия проекта"] = st.text_input("Стадия Проекта", value="")
+#                 inputs["Назначение Объекта"] = st.text_input("Назначение Объекта", value="")
+#                 inputs["Номер ГПЗУ"] = st.text_input("Номер ГПЗУ", value="")
+#                 inputs["Этажность"] = st.text_input("Этажность", value="")
+#                 inputs["Количество Надземных Этажей"] = st.text_input("Количество Надземных Этажей", value="")
+#                 inputs["Количество Подземных Этажей"] = st.text_input("Количество Подземных Этажей", value="")
+#                 inputs["Количество секций"] = st.text_input("Количество секций", value="")
+#                 inputs["Общая площадь здания m²"] = st.text_input("Общая площадь здания m² ", value="")
+#                 inputs["Строительный Объем m³"] = st.text_input("Строительный Объем m³", value="")  
+#                 inputs["Площадь участка"] = st.text_input("Площадь участка", value="")
+#                 inputs["Полезная площадь"] = st.text_input("Полезная площадь", value="")
+#     if len(inputs) > 0:  # Просматривайте информационную таблицу только при наличии сохраненных данных
+#         st.write("***Основные характеристики Проекта:***")
+#         with st.expander("Показать таблицу"):
+#             df = pd.DataFrame(inputs.items(), columns=['Имя атрибута', 'Описание'])
+#             st.table(df)   
+#             #  Создайте кнопку загрузки таблицы в файл Excel
+#             if st.checkbox('скачать таблицу в формате Excel'):
+#                 df_to_save = pd.DataFrame(inputs.items(), columns=['Имя атрибута', 'Описание'])
+#                 excel_file = 'Основные характеристики Проекта.xlsx'
+#                 with pd.ExcelWriter(excel_file) as writer:
+#                     df_to_save.to_excel(writer, index=False, sheet_name='Основные характеристики Проекта')
+#                     st.markdown(f'<a href="{excel_file}" download="Основные характеристики Проекта.xlsx">Нажмите здесь, чтобы скачать таблицу в формате Excel</a>', unsafe_allow_html=True)
+#                     st.markdown("---")
+
+
+import streamlit as st
+import pandas as pd
+from st_aggrid import AgGrid
+
 if st.sidebar.checkbox("Основные характеристики"):
-    # st.sidebar.markdown("---")
     selected_dashboards = st.multiselect("Основные характеристики Проекта", ["Основные характеристики"])
-    show_fields = st.checkbox("Характеристики проекта ")
+    show_fields = st.checkbox("Характеристики проекта")
     inputs = {}  # Пустой словарь для хранения введенных значений
     if show_fields:
         for dashboard_option in selected_dashboards:
@@ -71,15 +114,8 @@ if st.sidebar.checkbox("Основные характеристики"):
         st.write("***Основные характеристики Проекта:***")
         with st.expander("Показать таблицу"):
             df = pd.DataFrame(inputs.items(), columns=['Имя атрибута', 'Описание'])
-            st.table(df)   
-            #  Создайте кнопку загрузки таблицы в файл Excel
-            if st.checkbox('скачать таблицу в формате Excel'):
-                df_to_save = pd.DataFrame(inputs.items(), columns=['Имя атрибута', 'Описание'])
-                excel_file = 'Основные характеристики Проекта.xlsx'
-                with pd.ExcelWriter(excel_file) as writer:
-                    df_to_save.to_excel(writer, index=False, sheet_name='Основные характеристики Проекта')
-                    st.markdown(f'<a href="{excel_file}" download="Основные характеристики Проекта.xlsx">Нажмите здесь, чтобы скачать таблицу в формате Excel</a>', unsafe_allow_html=True)
-                    st.markdown("---")
+            AgGrid(df)
+
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------------------------------------------------------
