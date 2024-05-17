@@ -549,21 +549,7 @@ if st.sidebar.checkbox("Справка"):
 #-----------------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------------------
-# #Открыть файл Renga.rnp
+
  
-#Открыть файл Renga.rnp
-if st.sidebar.checkbox("Открыть файл Renga.rnp"):
-    uploaded_file = st.sidebar.file_uploader("Импорт файла Renga", type=["rnp"])
-    if uploaded_file is not None:
-        # Create the 'temp' directory if it doesn't exist
-        if not os.path.exists("temp"):
-            os.makedirs("temp")
-        
-        # Save the uploaded file in the 'temp' directory
-        with open(os.path.join("temp", uploaded_file.name), "wb") as f:
-            f.write(uploaded_file.getbuffer())
-        
-        # Запускаем файл
-        os.startfile(os.path.join("temp", uploaded_file.name))
-        st.sidebar.success("Файл был успешно импортирован и запущен!")
+
  
