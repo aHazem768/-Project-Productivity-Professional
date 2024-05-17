@@ -119,7 +119,8 @@ if show_upload_button:
         show_upload_button = st.sidebar.checkbox("Общий протокол")
         if show_upload_button:
           st.write('Общий протокол')
-          st.write(df)
+          st.dataframe(df, width=600)
+          # st.write(df)
           st.markdown("---")
         # Применение шаблона к именам пользователей
         pattern = re.compile(r'^[А-Яа-я]+\s[А-Яа-я]+$|^\w+\s\w+$')  
