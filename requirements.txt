@@ -2,7 +2,7 @@ docx==0.2.4
 pandas==2.2.2
 Pillow==10.3.0
 plotly==5.21.0
-streamlit==1.34.0
+
 streamlit==1.15.2
 pandas==1.5.3
 Pillow==9.4.0
