@@ -553,6 +553,7 @@ import streamlit as st
 import tempfile
 import os
 import subprocess
+import platform
 
 # Открыть файл Renga.rnp
 if st.sidebar.checkbox("Открыть файл Renga.rnp"):
@@ -570,18 +571,21 @@ if st.sidebar.checkbox("Открыть файл Renga.rnp"):
             st.write("Файл сохранен по пути:", file_path)
             
             # Открытие файла с использованием приложения по умолчанию, ассоциированного с его расширением
-            try:
-                subprocess.Popen(["xdg-open", file_path])  # Для Linux
+            system = platform.system()
+            if system == "Linux":
+                subprocess.Popen(["xdg-open", file_path])
                 st.write("Файл открыт с использованием xdg-open")
-            except FileNotFoundError:
-                try:
-                    subprocess.Popen(["open", file_path])  # Для macOS
-                    st.write("Файл открыт с использованием open")
-                except FileNotFoundError:
-                    os.startfile(file_path)  # Для Windows
-                    st.write("Файл открыт с использованием os.startfile")
+            elif system == "Darwin":  # macOS
+                subprocess.Popen(["open", file_path])
+                st.write("Файл открыт с использованием open")
+            elif system == "Windows":
+                os.startfile(file_path)
+                st.write("Файл открыт с использованием os.startfile")
+            else:
+                st.error(f"Операционная система '{system}' не поддерживается для автоматического открытия файлов")
             
             st.sidebar.success("Файл успешно импортирован и открыт!")
         except Exception as e:
             st.error(f"Произошла ошибка: {e}")
             st.write(f"Детали ошибки: {e}")
+
