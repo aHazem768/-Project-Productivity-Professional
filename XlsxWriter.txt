@@ -1,0 +1,1 @@
+XlsxWriter==3.2.0virtualenv==20.25.1whichcraft==0.6.1reportlab==4.2.0pyinstaller==6.6.0ply==3.11openpyxl==3.0.10streamlit ==1.30.0plotly==5.19.0docx==1.1.0
