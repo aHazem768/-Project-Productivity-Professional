@@ -42,10 +42,12 @@ resized_image = image.resize(new_size)
 #------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------
 # Основные характеристики
+import streamlit as st
+import pandas as pd
+
 if st.sidebar.checkbox("Основные характеристики"):
-    # st.sidebar.markdown("---")
     selected_dashboards = st.multiselect("Основные характеристики Проекта", ["Основные характеристики"])
-    show_fields = st.checkbox("Характеристики проекта ")
+    show_fields = st.checkbox("Характеристики проекта")
     inputs = {}  # Пустой словарь для хранения введенных значений
     if show_fields:
         for dashboard_option in selected_dashboards:
@@ -71,26 +73,15 @@ if st.sidebar.checkbox("Основные характеристики"):
         st.write("***Основные характеристики Проекта:***")
         with st.expander("Показать таблицу"):
             df = pd.DataFrame(inputs.items(), columns=['Имя атрибута', 'Описание'])
-            st.markdown(
-                """
-                <style>
-                .dataframe thead th {
-                    text-align: left;
-                }
-                .dataframe tbody tr th {
-                    max-width: 30px;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                }
-                .dataframe tbody tr td {
-                    max-width: 30px;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                }
-                </style>
-                """, unsafe_allow_html=True)
-            st.write(df)
-            st.write(df)   
+
+            # Применение стилей к DataFrame
+            styled_df = df.style.set_table_styles([
+                {'selector': 'th', 'props': [('max-width', '30px'), ('word-wrap', 'break-word')]},
+                {'selector': 'td', 'props': [('max-width', '30px'), ('word-wrap', 'break-word')]}
+            ])
+
+            st.write(styled_df.to_html(), unsafe_allow_html=True)
+  
            
 
 
