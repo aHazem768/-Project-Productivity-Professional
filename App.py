@@ -80,7 +80,8 @@ if st.sidebar.checkbox("Основные характеристики"):
                 {'selector': 'td', 'props': [('max-width', '300px'), ('word-wrap', 'break-word')]}
             ])
 
-            st.write(styled_df.to_html(), unsafe_allow_html=True)
+            # st.write(styled_df.to_html(), unsafe_allow_html=True)
+             st.write(df)
   
            
 
