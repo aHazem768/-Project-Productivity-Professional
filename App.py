@@ -207,7 +207,7 @@ if show_upload_button:
 
         # Выводим DataFrame с новым столбцом
         st.write(cleaned_results_df)
-        st.write(cleaned_results_df, width=800)
+        st.dataframe(cleaned_results_df, width=800)
         image = Image.open("workflow_workspace___office_3d_people_person_team_working_together_work_teamwork2x.webp")
         new_size = (30, 30)
         resized_image = image.resize(new_size)
