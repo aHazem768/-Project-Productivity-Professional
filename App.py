@@ -71,7 +71,7 @@ if st.sidebar.checkbox("Основные характеристики"):
         st.write("***Основные характеристики Проекта:***")
         with st.expander("Показать таблицу"):
             df = pd.DataFrame(inputs.items(), columns=['Имя атрибута', 'Описание'])
-            st.table(df)   
+            st.write(df)   
             #  Создайте кнопку загрузки таблицы в файл Excel
             # if st.checkbox('скачать таблицу в формате Excel'):
             #     df_to_save = pd.DataFrame(inputs.items(), columns=['Имя атрибута', 'Описание'])
