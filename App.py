@@ -10,9 +10,9 @@ import os
 # from docx.shared import Inches
 import tempfile
 import subprocess
-import win32com.client
-import tempfile
-import magic
+# import win32com.client
+# import tempfile
+# import magic
 # import openpyxl
 #------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------
