@@ -3,11 +3,11 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
-# import plotly.express as px
+import plotly.express as px
 import re
 import os
-# from docx import Document
-# from docx.shared import Inches
+from docx import Document
+from docx.shared import Inches
 import tempfile
 import subprocess
 # import win32com.client
@@ -328,24 +328,24 @@ if st.sidebar.checkbox("элементов"):
                 # Создайте файл Word и запишите в него таблицу
                 document = Document()
                 
-               # # Добавьте изображение в верхнюю часть документа
-               #  document.add_picture('Урфу.jpg', width=Inches(1.0), height=Inches(1.0))
+               # Добавьте изображение в верхнюю часть документа
+                document.add_picture('Урфу.jpg', width=Inches(1.0), height=Inches(1.0))
                 
-               #  document.add_heading('Таблица элементов', level=1)
+                document.add_heading('Таблица элементов', level=1)
 
-               #  # Добавить таблицу
-               #  table = document.add_table(rows=combined_df.shape[0]+1, cols=combined_df.shape[1])
-               #  # Добавить заголовки
-               #  for j in range(combined_df.shape[-1]):
-               #      table.cell(0, j).text = combined_df.columns[j]
-               #  # Добавить данные
-               #  for i in range(combined_df.shape[0]):
-               #      for j in range(combined_df.shape[-1]):
-               #          table.cell(i+1, j).text = str(combined_df.iloc[i,j])
+                # Добавить таблицу
+                table = document.add_table(rows=combined_df.shape[0]+1, cols=combined_df.shape[1])
+                # Добавить заголовки
+                for j in range(combined_df.shape[-1]):
+                    table.cell(0, j).text = combined_df.columns[j]
+                # Добавить данные
+                for i in range(combined_df.shape[0]):
+                    for j in range(combined_df.shape[-1]):
+                        table.cell(i+1, j).text = str(combined_df.iloc[i,j])
 
-               #  # Сохраните файл
-               #  document.save('таблица элементов.docx')
-               #  st.success("Таблица была успешно сохранена в файле Word.")               
+                # Сохраните файл
+                document.save('таблица элементов.docx')
+                st.success("Таблица была успешно сохранена в файле Word.")               
 #----------------------------------------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------------------------------------
 #  Спецификации элементов
