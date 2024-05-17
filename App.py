@@ -73,7 +73,7 @@ if st.sidebar.checkbox("Основные характеристики"):
             df = pd.DataFrame(inputs.items(), columns=['Имя атрибута', 'Описание'])
           
             st.write(df) 
-  
+            st.dataframe(df, width=800)
            
 
 
