@@ -72,7 +72,7 @@ if st.sidebar.checkbox("Основные характеристики"):
         with st.expander("Показать таблицу"):
             df = pd.DataFrame(inputs.items(), columns=['Имя атрибута', 'Описание'])
           
-            st.write(df) 
+            # st.write(df) 
             st.dataframe(df, width=800)
            
 
