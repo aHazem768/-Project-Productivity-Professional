@@ -10,9 +10,9 @@ import os
 # from docx.shared import Inches
 import tempfile
 import subprocess
-import win32com.client
-import tempfile
-import magic
+# import win32com.client
+# import tempfile
+# import magic
 # import openpyxl
 #------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------
@@ -397,28 +397,28 @@ if st.sidebar.checkbox("Renga Api"):
 #------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------
-# #Открыть файл Renga.rnp
-if st.sidebar.checkbox("Открыть файл Renga.rnp"):
-    uploaded_file = st.sidebar.file_uploader("Импорт файла Renga", type=["rnp"])
-    if uploaded_file is not None:
-        # Создание временного каталога, если он не существует
-        temp_dir = tempfile.mkdtemp()
+# # #Открыть файл Renga.rnp
+# if st.sidebar.checkbox("Открыть файл Renga.rnp"):
+#     uploaded_file = st.sidebar.file_uploader("Импорт файла Renga", type=["rnp"])
+#     if uploaded_file is not None:
+#         # Создание временного каталога, если он не существует
+#         temp_dir = tempfile.mkdtemp()
         
-        # Сохранение загруженного файла во временном каталоге
-        file_path = os.path.join(temp_dir, uploaded_file.name)
-        with open(file_path, "wb") as f:
-            f.write(uploaded_file.getbuffer())
+#         # Сохранение загруженного файла во временном каталоге
+#         file_path = os.path.join(temp_dir, uploaded_file.name)
+#         with open(file_path, "wb") as f:
+#             f.write(uploaded_file.getbuffer())
         
-        # Открытие файла с использованием приложения по умолчанию, ассоциированного с его расширением
-        try:
-            subprocess.Popen(["xdg-open", file_path])  # Для Linux
-        except FileNotFoundError:
-            try:
-                subprocess.Popen(["open", file_path])  # Для macOS
-            except FileNotFoundError:
-                os.startfile(file_path)  # Для Windows
+#         # Открытие файла с использованием приложения по умолчанию, ассоциированного с его расширением
+#         try:
+#             subprocess.Popen(["xdg-open", file_path])  # Для Linux
+#         except FileNotFoundError:
+#             try:
+#                 subprocess.Popen(["open", file_path])  # Для macOS
+#             except FileNotFoundError:
+#                 os.startfile(file_path)  # Для Windows
         
-        st.sidebar.success("Файл успешно импортирован и открыт!")
+#         st.sidebar.success("Файл успешно импортирован и открыт!")
 #-----------------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------------------
